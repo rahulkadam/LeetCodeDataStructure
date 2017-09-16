@@ -1,0 +1,47 @@
+package com.DS.sorting;
+
+import java.io.IOException;
+
+public class Combination {
+
+	public static int lengthOfLongestSubstring(String s) {
+		int l = s.length();
+		int cache[] = new int[256];
+		int max = 0;
+		for (int i = 0; i < l; i++) {
+			int count = 0;
+			for (int j = i; j >= 0; j--) {
+				if (cache[s.charAt(j)] == 1) {
+					break;
+				} else {
+					count++;
+					System.out.println("j : " + s.charAt(j) + " :" + j + " i :" + i + "  Count :" + count);
+					cache[s.charAt(j)] = 1;
+				}
+			}
+			if (max < count) {
+				max = count;
+			}
+			for (int k = i; k > i - count; k--) {
+				cache[s.charAt(k)] = 0;
+			}
+
+		}
+		return max;
+
+	}
+
+	public static String stringToString(String input) {
+		return input.substring(1, input.length() - 1);
+	}
+
+	public static void main(String[] args) throws IOException {
+
+		int ret = lengthOfLongestSubstring("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~");
+
+		String out = String.valueOf(ret);
+
+		System.out.print(out);
+	}
+
+}
